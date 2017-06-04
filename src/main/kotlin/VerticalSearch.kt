@@ -1,10 +1,11 @@
-class HorizontalSearch(val word: String, val puzzle: Array<Array<String>>) {
+class VerticalSearch(val word: String, val puzzle: Array<Array<String>>) {
 
     fun execute(): List<String?> {
-        return puzzle.indices.map { rowIndex ->
-            val collatedRow: String = puzzle[rowIndex].map { it }.reduce({ accum, char -> "$accum$char" })
-            searchCardinally(rowIndex, word, collatedRow) ?:
-                    searchCardinally(rowIndex, word, collatedRow, reversed = true)
+        val columnIndices: IntRange = IntRange(0, puzzle[0].size - 1)
+        return columnIndices.map { columnIndex ->
+            val collatedColumn: String = puzzle.indices.map { puzzle[it][columnIndex] }.reduce({accum, char -> "$accum$char"})
+            searchCardinally(columnIndex, word, collatedColumn) ?:
+                    searchCardinally(columnIndex, word, collatedColumn, reversed = true)
         }.filterNotNull()
     }
 
@@ -32,7 +33,7 @@ class HorizontalSearch(val word: String, val puzzle: Array<Array<String>>) {
     }
 
     private fun buildCoordinateString(wordIndices: IntProgression, index: Int, word: String): String {
-        val coordinates: String = wordIndices.map { "($it,$index)," }.reduce({ accum, coords -> accum + coords.removeSuffix(",")})
+        val coordinates: String = wordIndices.map { "($index,$it)," }.reduce({ accum, coords -> accum + coords.removeSuffix(",")})
 
         return "$word: $coordinates"
     }
