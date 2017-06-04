@@ -4,7 +4,9 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
 
         words.forEach { word -> puzzle.indices.map { rowIndex ->
                 val collatedRow: String = puzzle[rowIndex].map { it }.reduce({ accum, char -> "$accum$char" })
-                val result: String? = searchHorizontally(rowIndex, word, collatedRow) ?: searchReverseHorizontally(rowIndex, word.reversed(), collatedRow)
+                val result: String? =
+                        searchHorizontally(rowIndex, word, collatedRow) ?:
+                        searchHorizontally(rowIndex, word, collatedRow, reversed = true)
                 output.add(result)
             }
         }
@@ -12,23 +14,17 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         return output.filterNotNull()
     }
 
-    private fun searchHorizontally(rowIndex: Int, word: String, collatedRow: String): String? {
-        val foundIndex: Int = collatedRow.indexOf(word)
-        if (foundIndex > -1) {
-            val wordIndices: IntRange = getWordIndices(foundIndex, word)
-            var foundString: String = buildCoordinateString(wordIndices, rowIndex, word)
-
-            return foundString
+    private fun searchHorizontally(rowIndex: Int, word: String, collatedRow: String, reversed: Boolean = false): String? {
+        val directedWord = when { reversed -> word.reversed() else -> word }
+        val getWordIndicesWithDirection = when {
+            reversed -> {foundIndex: Int, word: String -> getWordIndices(foundIndex, word).reversed()}
+            else -> {foundIndex: Int, word: String -> getWordIndices(foundIndex, word)}
         }
 
-        return null
-    }
-
-    private fun searchReverseHorizontally(rowIndex: Int, word: String, collatedRow: String): String? {
-        val foundIndex: Int = collatedRow.indexOf(word)
+        val foundIndex: Int = collatedRow.indexOf(directedWord)
         if (foundIndex > -1) {
-            val wordIndices: IntProgression = getWordIndices(foundIndex, word).reversed()
-            val foundString: String = buildCoordinateString(wordIndices, rowIndex, word.reversed())
+            val wordIndices: IntProgression = getWordIndicesWithDirection(foundIndex, directedWord)
+            val foundString: String = buildCoordinateString(wordIndices, rowIndex, word)
 
             return foundString
         }
