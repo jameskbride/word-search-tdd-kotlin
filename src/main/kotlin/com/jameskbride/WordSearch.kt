@@ -1,3 +1,5 @@
+package com.jameskbride
+
 class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
     fun search(): List<String> {
         val output: MutableList<String?> = mutableListOf()

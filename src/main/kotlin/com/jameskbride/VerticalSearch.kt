@@ -1,4 +1,4 @@
-
+package com.jameskbride
 class VerticalSearch(word: String, puzzle: Array<Array<String>>) : CardinalSearch(word, puzzle) {
 
     fun execute(): List<String?> {

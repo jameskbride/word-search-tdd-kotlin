@@ -1,3 +1,5 @@
+package com.jameskbride
+
 class HorizontalSearch(word: String, puzzle: Array<Array<String>>) : CardinalSearch(word, puzzle){
 
     fun execute(): List<String?> {
