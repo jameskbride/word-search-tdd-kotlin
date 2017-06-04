@@ -1,4 +1,5 @@
 open abstract class CardinalSearch(val word: String, val puzzle: Array<Array<String>>) {
+
     protected fun searchCardinally(index: Int, word: String, collatedWord: String, reversed: Boolean = false): String? {
         val directedWord = when {
             reversed -> word.reversed()
