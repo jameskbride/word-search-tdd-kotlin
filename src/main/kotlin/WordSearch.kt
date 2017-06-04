@@ -21,13 +21,13 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
     }
 
     private fun searchCardinally(index: Int, word: String, collatedWord: String, reversed: Boolean = false, direction: Direction): String? {
-        val directedWord = when { reversed -> word.reversed()
+        val directedWord = when {
+            reversed -> word.reversed()
             else -> word
         }
-        val getWordIndicesWithDirection = if (reversed) {
-            { foundIndex: Int, word: String -> getWordIndices(foundIndex, word).reversed() }
-        } else {
-            { foundIndex: Int, word: String -> getWordIndices(foundIndex, word) }
+        val getWordIndicesWithDirection = when {
+            reversed -> {foundIndex: Int, word: String -> getWordIndices(foundIndex, word).reversed()}
+            else -> { foundIndex: Int, word: String -> getWordIndices(foundIndex, word) }
         }
 
         val foundIndex: Int = collatedWord.indexOf(directedWord)
@@ -48,8 +48,7 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
             Direction.HORIZONTAL -> wordIndices.map { "($it,$index)," }
             Direction.VERTICAL -> wordIndices.map { "($index,$it)," }
         }
-        val coordinates: String = coordinateMapper.reduce({ accum, coords ->
-        accum + coords.removeSuffix(",")})
+        val coordinates: String = coordinateMapper.reduce({ accum, coords -> accum + coords.removeSuffix(",")})
 
         return "$word: $coordinates"
     }
