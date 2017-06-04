@@ -20,17 +20,20 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         return output.filterNotNull()
     }
 
-    private fun searchCardinally(columnIndex: Int, word: String, collatedColumn: String, reversed: Boolean = false, direction: Direction): String? {
-        val directedWord = when { reversed -> word.reversed() else -> word }
-        val getWordIndicesWithDirection = when {
-            reversed -> {foundIndex: Int, word: String -> getWordIndices(foundIndex, word).reversed()}
-            else -> {foundIndex: Int, word: String -> getWordIndices(foundIndex, word)}
+    private fun searchCardinally(index: Int, word: String, collatedWord: String, reversed: Boolean = false, direction: Direction): String? {
+        val directedWord = when { reversed -> word.reversed()
+            else -> word
+        }
+        val getWordIndicesWithDirection = if (reversed) {
+            { foundIndex: Int, word: String -> getWordIndices(foundIndex, word).reversed() }
+        } else {
+            { foundIndex: Int, word: String -> getWordIndices(foundIndex, word) }
         }
 
-        val foundIndex: Int = collatedColumn.indexOf(directedWord)
+        val foundIndex: Int = collatedWord.indexOf(directedWord)
         return if (foundIndex > -1) {
             val wordIndices: IntProgression = getWordIndicesWithDirection(foundIndex, directedWord)
-            buildCoordinateString(wordIndices, columnIndex, word, direction)
+            buildCoordinateString(wordIndices, index, word, direction)
         } else {
             null
         }
@@ -40,10 +43,10 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
          return IntRange(foundIndex, foundIndex + word.length - 1)
     }
 
-    private fun buildCoordinateString(wordIndices: IntProgression, rowIndex: Int, word: String, direction: Direction): String {
+    private fun buildCoordinateString(wordIndices: IntProgression, index: Int, word: String, direction: Direction): String {
         val coordinateMapper = when(direction) {
-            Direction.HORIZONTAL -> wordIndices.map { "($it,$rowIndex)," }
-            Direction.VERTICAL -> wordIndices.map { "($rowIndex,$it)," }
+            Direction.HORIZONTAL -> wordIndices.map { "($it,$index)," }
+            Direction.VERTICAL -> wordIndices.map { "($index,$it)," }
         }
         val coordinates: String = coordinateMapper.reduce({ accum, coords ->
         accum + coords.removeSuffix(",")})
