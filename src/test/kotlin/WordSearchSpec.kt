@@ -36,9 +36,8 @@ object WordSearchSpec: Spek({
                         arrayOf("O","N"),
                         arrayOf("I","T")
                 )
-        val toFind: String = "ON"
         it("can find one word by searching forward") {
-            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+            val wordSearch: WordSearch = WordSearch(listOf("ON"), puzzle)
 
             val results: List<String> = wordSearch.search()
             assertEquals(1, results.size)
@@ -46,9 +45,7 @@ object WordSearchSpec: Spek({
         }
 
         it("can find one word by searching backwards") {
-            val toFind: String = "NO"
-
-            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+            val wordSearch: WordSearch = WordSearch(listOf("NO"), puzzle)
 
             val results: List<String> = wordSearch.search()
             assertEquals(1, results.size)
@@ -82,10 +79,7 @@ object WordSearchSpec: Spek({
                 )
 
         it("can find one word by searching forward") {
-
-            val toFind: String = "OI"
-
-            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+            val wordSearch: WordSearch = WordSearch(listOf("OI"), puzzle)
 
             val results: List<String> = wordSearch.search()
             assertEquals(1, results.size)
@@ -93,9 +87,7 @@ object WordSearchSpec: Spek({
         }
 
         it("can find one word by searching backwards") {
-            val toFind: String = "IO"
-
-            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+            val wordSearch: WordSearch = WordSearch(listOf("IO"), puzzle)
 
             val results: List<String> = wordSearch.search()
             assertEquals(1, results.size)
