@@ -94,4 +94,21 @@ object WordSearchSpec: Spek({
             assertEquals("TI: (1,1),(0,1)", results[1])
         }
     }
+
+    describe("searching vertically") {
+        it("can find one word by searching forward") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","N"),
+                            arrayOf("Z","Z")
+                    )
+            val toFind: String = "OZ"
+
+            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+
+            val results: List<String> = wordSearch.search()
+            assertEquals(1, results.size)
+            assertEquals("OZ: (0,0),(0,1)", results[0])
+        }
+    }
 })
