@@ -12,7 +12,8 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
             val columnIndices: IntRange = IntRange(0, puzzle[0].size - 1)
             output.addAll(columnIndices.map { columnIndex ->
                 val collatedColumn: String = puzzle.indices.map { puzzle[it][columnIndex] }.reduce({accum, char -> "$accum$char"})
-                searchVertically(columnIndex, word, collatedColumn)
+                searchVertically(columnIndex, word, collatedColumn) ?:
+                        searchVertically(columnIndex, word, collatedColumn, reversed = true)
             })
         }
 
