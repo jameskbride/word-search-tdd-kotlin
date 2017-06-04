@@ -22,27 +22,23 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         }
 
         val foundIndex: Int = collatedRow.indexOf(directedWord)
-        if (foundIndex > -1) {
+        return if (foundIndex > -1) {
             val wordIndices: IntProgression = getWordIndicesWithDirection(foundIndex, directedWord)
-            val foundString: String = buildCoordinateString(wordIndices, rowIndex, word)
-
-            return foundString
+            buildCoordinateString(wordIndices, rowIndex, word)
+        } else {
+            null
         }
-
-        return null
     }
 
     private fun getWordIndices(foundIndex: Int, word: String): IntRange {
-        val wordIndices: IntRange = IntRange(foundIndex, foundIndex + word.length - 1)
-        return wordIndices
+         return IntRange(foundIndex, foundIndex + word.length - 1)
     }
 
     private fun buildCoordinateString(wordIndices: IntProgression, rowIndex: Int, word: String): String {
         val coordinates: String = wordIndices.map { "($it,$rowIndex)," }.reduce({ accum, coords ->
             accum + coords.removeSuffix(",")
         })
-        val foundString: String = "${word}: $coordinates"
 
-        return foundString
+        return "$word: $coordinates"
     }
 }
