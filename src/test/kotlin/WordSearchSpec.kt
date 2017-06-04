@@ -18,7 +18,7 @@ object WordSearchSpec: Spek({
                         arrayOf("Z","Z","Z","Z","Z")
                 )
 
-        it("it should read the list of words to find") {
+        it("reads the list of words to find") {
             val expectedWords: List<String> = listOf("BONES", "KIRK")
 
             val wordSearch: WordSearch = WordSearch(expectedWords, puzzle)
@@ -26,10 +26,27 @@ object WordSearchSpec: Spek({
             assertTrue(wordSearch.words.containsAll(expectedWords))
         }
 
-        it("it should read the puzzle") {
+        it("reads the puzzle") {
             val wordSearch: WordSearch = WordSearch(listOf("BONES"), puzzle)
 
             assertArrayEquals(puzzle, wordSearch.puzzle)
+        }
+    }
+
+    describe("searching horizontally") {
+        it("can find the word by searching forward") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","N"),
+                            arrayOf("Z","Z")
+                    )
+            val toFind: String = "ON"
+
+            val wordSearch: WordSearch = WordSearch(listOf(toFind), puzzle)
+
+            val results: List<String> = wordSearch.search()
+            assertEquals(1, results.size)
+            assertEquals("ON: (0,0),(1,0)", results[0])
         }
     }
 })
