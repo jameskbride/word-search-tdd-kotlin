@@ -10,5 +10,5 @@ class HorizontalSearch(word: String, puzzle: Array<Array<String>>) : CardinalSea
         }.filterNotNull()
     }
 
-    override fun buildCoordinates(wordIndices: IntProgression, index: Int) = wordIndices.map { "($it,$index)," }
+    override fun buildCoordinates(wordIndices: IntProgression, index: Int) = wordIndices.map { "($it,$index)" }
 }

@@ -10,5 +10,5 @@ class VerticalSearch(word: String, puzzle: Array<Array<String>>) : CardinalSearc
         }.filterNotNull()
     }
 
-    override fun buildCoordinates(wordIndices: IntProgression, index: Int) = wordIndices.map { "($index,$it)," }
+    override fun buildCoordinates(wordIndices: IntProgression, index: Int) = wordIndices.map { "($index,$it)" }
 }

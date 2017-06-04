@@ -26,7 +26,7 @@ open abstract class CardinalSearch(val word: String, val puzzle: Array<Array<Str
     }
 
     private fun buildCoordinateString(wordIndices: IntProgression, index: Int, word: String): String {
-        val coordinates: String = buildCoordinates(wordIndices, index).reduce({ accum, coords -> accum + coords.removeSuffix(",")})
+        val coordinates: String = buildCoordinates(wordIndices, index).joinToString(",")
 
         return "$word: $coordinates"
     }
