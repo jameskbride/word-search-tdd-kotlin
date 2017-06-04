@@ -3,20 +3,17 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         val output: MutableList<String?> = mutableListOf()
 
         words.forEach { word ->
-            puzzle.indices.map { rowIndex ->
+            output.addAll(puzzle.indices.map { rowIndex ->
                 val collatedRow: String = puzzle[rowIndex].map { it }.reduce({ accum, char -> "$accum$char" })
-                val result: String? =
-                        searchHorizontally(rowIndex, word, collatedRow) ?:
-                        searchHorizontally(rowIndex, word, collatedRow, reversed = true)
-                output.add(result)
-            }
+                searchHorizontally(rowIndex, word, collatedRow) ?:
+                    searchHorizontally(rowIndex, word, collatedRow, reversed = true)
+            })
 
             val columnIndices: IntRange = IntRange(0, puzzle[0].size - 1)
-            for (columnIndex in columnIndices) {
+            output.addAll(columnIndices.map { columnIndex ->
                 val collatedColumn: String = puzzle.indices.map { puzzle[it][columnIndex] }.reduce({accum, char -> "$accum$char"})
-                val result: String? = searchVertically(columnIndex, word, collatedColumn)
-                output.add(result)
-            }
+                searchVertically(columnIndex, word, collatedColumn)
+            })
         }
 
         return output.filterNotNull()
