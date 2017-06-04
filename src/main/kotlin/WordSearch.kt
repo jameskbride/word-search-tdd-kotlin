@@ -3,11 +3,7 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         val output: MutableList<String?> = mutableListOf()
 
         words.forEach { word ->
-            output.addAll(puzzle.indices.map { rowIndex ->
-                val collatedRow: String = puzzle[rowIndex].map { it }.reduce({ accum, char -> "$accum$char" })
-                searchCardinally(rowIndex, word, collatedRow, direction = Direction.HORIZONTAL) ?:
-                        searchCardinally(rowIndex, word, collatedRow, direction = Direction.HORIZONTAL, reversed = true)
-            })
+            output.addAll(HorizontalSearch(word, puzzle).execute())
 
             val columnIndices: IntRange = IntRange(0, puzzle[0].size - 1)
             output.addAll(columnIndices.map { columnIndex ->
@@ -51,9 +47,5 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         val coordinates: String = coordinateMapper.reduce({ accum, coords -> accum + coords.removeSuffix(",")})
 
         return "$word: $coordinates"
-    }
-
-    private enum class Direction {
-        HORIZONTAL, VERTICAL
     }
 }
