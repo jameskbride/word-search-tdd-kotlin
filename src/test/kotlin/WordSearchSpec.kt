@@ -140,5 +140,20 @@ object WordSearchSpec: Spek({
             assertEquals("OI: (0,0),(0,1)", results[0])
             assertEquals("NT: (1,0),(1,1)", results[1])
         }
+
+        it("can find multiple words by searching backwards") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","N"),
+                            arrayOf("I","T")
+                    )
+
+            val wordSearch: WordSearch = WordSearch(listOf("IO", "TN"), puzzle)
+
+            val results: List<String> = wordSearch.search()
+            assertEquals(2, results.size)
+            assertEquals("IO: (0,1),(0,0)", results[0])
+            assertEquals("TN: (1,1),(1,0)", results[1])
+        }
     }
 })
