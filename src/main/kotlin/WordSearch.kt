@@ -1,8 +1,8 @@
 class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
     fun search(): List<String> {
         val output: MutableList<String?> = mutableListOf()
-        for (word in words) {
-            for (rowIndex in puzzle.indices) {
+
+        words.forEach { word -> puzzle.indices.map { rowIndex ->
                 val result: String? = searchHorizontally(rowIndex, word)
                 output.add(result)
             }
