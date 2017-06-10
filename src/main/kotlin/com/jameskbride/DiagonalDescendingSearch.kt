@@ -3,8 +3,8 @@ package com.jameskbride
 class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>>) {
 
     fun execute(): List<String?> {
-        val matchingVectors: List<String> = buildDiagonalVectors().filter {vector -> vector.indexOf(word) > -1}
-        val coordinates: List<String?> = buildCoordinates(matchingVectors)
+        val diagonalVectors: List<String> = buildDiagonalVectors()
+        val coordinates: List<String?> = buildCoordinates(diagonalVectors).filterNotNull()
 
         return buildCoordinateString(coordinates)
     }
@@ -12,11 +12,15 @@ class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>
     private fun buildCoordinateString(coordinates: List<String?>) = coordinates.map { coords -> "$word: $coords" }
 
     private fun buildCoordinates(matchingVectors: List<String>): List<String?> {
-        val coordinates: List<String?> = matchingVectors.map { vector ->
-            val startingRow = vector.indexOf(word)
-            val rowRange: IntRange = IntRange(startingRow, startingRow + word.indices.last)
-            var currentColumnIndex = rowRange.first
-            rowRange.map { rowIndex -> "($rowIndex,${currentColumnIndex++})" }.joinToString(",")
+        val coordinates: List<String?> = matchingVectors.mapIndexed{ index, vector ->
+            val startingColumn = vector.indexOf(word)
+            if (startingColumn > -1) {
+                var currentColumnIndex = startingColumn
+                val rowRange: IntRange = IntRange(index, index + word.indices.last)
+                rowRange.map { rowIndex -> "(${currentColumnIndex++},$rowIndex)" }.joinToString(",")
+            } else {
+                null
+            }
         }
         return coordinates
     }

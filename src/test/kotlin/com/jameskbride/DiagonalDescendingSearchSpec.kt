@@ -11,19 +11,32 @@ import org.junit.runner.RunWith
 object DiagonalDescendingSearchSpec: Spek({
 
     describe("searching diagonally descending") {
-        val puzzle: Array<Array<String>> =
-                arrayOf(
-                        arrayOf("O","T"),
-                        arrayOf("I","N")
-                )
 
-        it("can find one word by searching forward") {
-            val search: DiagonalDescendingSearch = DiagonalDescendingSearch("ON", puzzle)
+        describe("search forward") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","T", "X"),
+                            arrayOf("I","N", "Y"),
+                            arrayOf("A","B", "C")
+                    )
+            it("can find one word ") {
 
-            val results: List<String?> = search.execute()
+                val search: DiagonalDescendingSearch = DiagonalDescendingSearch("ON", puzzle)
 
-            Assert.assertEquals(1, results.size)
-            Assert.assertEquals("ON: (0,0),(1,1)", results[0])
+                val results: List<String?> = search.execute()
+
+                Assert.assertEquals(1, results.size)
+                Assert.assertEquals("ON: (0,0),(1,1)", results[0])
+            }
+
+            it("can find a word off below the center diagonal") {
+                val search: DiagonalDescendingSearch = DiagonalDescendingSearch("IB", puzzle)
+
+                val results: List<String?> = search.execute()
+
+                Assert.assertEquals(1, results.size)
+                Assert.assertEquals("IB: (0,1),(1,2)", results[0])
+            }
         }
     }
 })
