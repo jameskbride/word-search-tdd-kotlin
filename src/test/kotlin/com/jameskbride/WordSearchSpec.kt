@@ -42,6 +42,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("ON"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(1, results.size)
             assertEquals("ON: (0,0),(1,0)", results[0])
         }
@@ -50,6 +51,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("NO"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(1, results.size)
             assertEquals("NO: (1,0),(0,0)", results[0])
         }
@@ -58,6 +60,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("ON", "IT"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(2, results.size)
             assertEquals("ON: (0,0),(1,0)", results[0])
             assertEquals("IT: (0,1),(1,1)", results[1])
@@ -67,6 +70,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("NO", "TI"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(2, results.size)
             assertEquals("NO: (1,0),(0,0)", results[0])
             assertEquals("TI: (1,1),(0,1)", results[1])
@@ -84,6 +88,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("OI"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(1, results.size)
             assertEquals("OI: (0,0),(0,1)", results[0])
         }
@@ -92,6 +97,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("IO"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(1, results.size)
             assertEquals("IO: (0,1),(0,0)", results[0])
         }
@@ -100,6 +106,7 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("OI", "NT"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(2, results.size)
             assertEquals("OI: (0,0),(0,1)", results[0])
             assertEquals("NT: (1,0),(1,1)", results[1])
@@ -109,9 +116,27 @@ object WordSearchSpec: Spek({
             val wordSearch: WordSearch = WordSearch(listOf("IO", "TN"), puzzle)
 
             val results: List<String> = wordSearch.search()
+
             assertEquals(2, results.size)
             assertEquals("IO: (0,1),(0,0)", results[0])
             assertEquals("TN: (1,1),(1,0)", results[1])
+        }
+    }
+
+    describe("searching diagonally descending") {
+        val puzzle: Array<Array<String>> =
+                arrayOf(
+                        arrayOf("O","T"),
+                        arrayOf("I","N")
+                )
+
+        it("can find one word by searching forward") {
+            val wordSearch: WordSearch = WordSearch(listOf("ON"), puzzle)
+
+            val results: List<String> = wordSearch.search()
+
+            assertEquals(1, results.size)
+            assertEquals("ON: (0,0),(1,1)", results[0])
         }
     }
 })
