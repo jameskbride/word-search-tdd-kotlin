@@ -17,7 +17,7 @@ class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>
             if (startingColumn > -1) {
                 var currentColumnIndex = startingColumn
                 val rowRange: IntRange = IntRange(index, index + word.indices.last)
-                rowRange.map { rowIndex -> "(${currentColumnIndex++},$rowIndex)" }.joinToString(",")
+                rowRange.map { rowIndex -> "(${currentColumnIndex++},${rowIndex + startingColumn})" }.joinToString(",")
             } else {
                 null
             }

@@ -37,6 +37,15 @@ object DiagonalDescendingSearchSpec: Spek({
                 Assert.assertEquals(1, results.size)
                 Assert.assertEquals("IB: (0,1),(1,2)", results[0])
             }
+
+            it("can find a word in the middle of a vector") {
+                val search: DiagonalDescendingSearch = DiagonalDescendingSearch("NC", puzzle)
+
+                val results: List<String?> = search.execute()
+
+                Assert.assertEquals(1, results.size)
+                Assert.assertEquals("NC: (1,1),(2,2)", results[0])
+            }
         }
     }
 })
