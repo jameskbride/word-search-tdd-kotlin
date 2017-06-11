@@ -141,13 +141,14 @@ object WordSearchSpec: Spek({
         }
 
         it("can find multiple words by searching forward") {
-            val wordSearch: WordSearch = WordSearch(listOf("ON", "IB"), puzzle)
+            val wordSearch: WordSearch = WordSearch(listOf("ON", "IB", "TY"), puzzle)
 
             val results: List<String> = wordSearch.search()
 
-            assertEquals(2, results.size)
+            assertEquals(3, results.size)
             assertEquals("ON: (0,0),(1,1)", results[0])
             assertEquals("IB: (0,1),(1,2)", results[1])
+            assertEquals("TY: (1,0),(2,1)", results[2])
         }
     }
 })
