@@ -1,11 +1,16 @@
 package com.jameskbride.search.diagonal
 
 abstract class DiagonalCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
-    fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
 
-    abstract fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>>
+    fun buildVectors(): MutableList<String> {
+        var collatedVectors: MutableList<String> = mutableListOf()
+        collatedVectors.addAll(IntRange(0, puzzle.indices.last).map { index ->
+            mapVectors(index)
+        })
 
-    abstract fun mapVectors(rowIndex: Int): String
+        return collatedVectors
+    }
+
     fun buildCoordinates(vectors: List<String>): List<String> {
         val coordinates: List<String> = vectors.mapIndexed{ startingRowIndex, vector ->
             val startingColumn = vector.indexOf(word)
@@ -25,12 +30,9 @@ abstract class DiagonalCoordinateBuilder(val word: String, val puzzle: Array<Arr
         }
     }
 
-    fun buildVectors(): MutableList<String> {
-        var collatedVectors: MutableList<String> = mutableListOf()
-        collatedVectors.addAll(IntRange(0, puzzle.indices.last).map { index ->
-            mapVectors(index)
-        })
+    fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
 
-        return collatedVectors
-    }
+    abstract fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>>
+
+    abstract fun mapVectors(rowIndex: Int): String
 }
