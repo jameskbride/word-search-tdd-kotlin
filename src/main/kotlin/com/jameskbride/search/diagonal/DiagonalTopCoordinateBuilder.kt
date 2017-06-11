@@ -1,22 +1,27 @@
 package com.jameskbride.search.diagonal
 
 class DiagonalTopCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
-    fun buildCoordinates(matchingVectors: List<String>): List<String?> {
-        val coordinates: List<String?> = matchingVectors.map{ vector ->
+    fun buildCoordinates(vectors: List<String>): List<String?> {
+        val coordinates: List<String?> = vectors.map{ vector ->
             val startingColumn = vector.indexOf(word)
             if (startingColumn > -1) {
-                var currentColumnIndex = startingColumn
-                val rowRange: IntRange = IntRange(startingColumn, startingColumn + word.length - 1)
-                rowRange.map { rowIndex ->
-                    currentColumnIndex++
-                    "(${currentColumnIndex},${rowIndex})"
-                }.joinToString(",")
+                val wordIndices: List<Pair<Int,Int>> = getWordIndices(word, startingColumn)
+                wordIndices.map { (x, y) -> "($x,$y)"}.joinToString(",")
             } else {
                 null
             }
         }
 
         return coordinates
+    }
+
+    private fun getWordIndices(word: String, startingColumn: Int): List<Pair<Int,Int>> {
+        var currentColumnIndex = startingColumn
+        val rowRange: IntRange = IntRange(startingColumn, startingColumn + word.length - 1)
+        return rowRange.map { rowIndex ->
+            currentColumnIndex++
+            Pair(currentColumnIndex, rowIndex )
+        }
     }
 
     fun buildVectors(): List<String> {

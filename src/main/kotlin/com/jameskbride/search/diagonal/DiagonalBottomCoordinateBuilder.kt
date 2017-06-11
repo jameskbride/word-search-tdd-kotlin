@@ -1,8 +1,8 @@
 package com.jameskbride.search.diagonal
 
 class DiagonalBottomCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
-    fun buildCoordinates(matchingVectors: List<String>): List<String> {
-        val coordinates: List<String> = matchingVectors.mapIndexed{ startingRowIndex, vector ->
+    fun buildCoordinates(vectors: List<String>): List<String> {
+        val coordinates: List<String> = vectors.mapIndexed{ startingRowIndex, vector ->
             val startingColumn = vector.indexOf(word)
             if (startingColumn > -1) {
                 val wordIndices: List<Pair<Int,Int>> = getWordIndices(word, startingColumn, startingRowIndex)
