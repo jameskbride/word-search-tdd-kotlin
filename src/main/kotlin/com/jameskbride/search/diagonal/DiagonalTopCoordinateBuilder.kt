@@ -19,8 +19,7 @@ class DiagonalTopCoordinateBuilder(val word: String, val puzzle: Array<Array<Str
         var currentColumnIndex = startingColumn
         val rowRange: IntRange = IntRange(startingColumn, startingColumn + word.length - 1)
         return rowRange.map { rowIndex ->
-            currentColumnIndex++
-            Pair(currentColumnIndex, rowIndex )
+            Pair(++currentColumnIndex, rowIndex )
         }
     }
 
