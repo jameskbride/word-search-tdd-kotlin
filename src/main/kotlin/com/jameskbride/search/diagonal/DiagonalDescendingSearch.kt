@@ -6,7 +6,7 @@ class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>
         val bottomCoordinateBuilder: DiagonalBottomCoordinateBuilder = DiagonalBottomCoordinateBuilder(word, puzzle)
         val bottomHalfDiagonalVectors: List<String> = bottomCoordinateBuilder.buildVectors()
 
-        val topCoordinateBuilder: DiagonalTopHalfCoordinateBuilder = DiagonalTopHalfCoordinateBuilder(word, puzzle)
+        val topCoordinateBuilder: DiagonalTopCoordinateBuilder = DiagonalTopCoordinateBuilder(word, puzzle)
         val topHalfDiagonalVectors: List<String> = topCoordinateBuilder.buildVectors()
 
         val coordinates: List<String?> =

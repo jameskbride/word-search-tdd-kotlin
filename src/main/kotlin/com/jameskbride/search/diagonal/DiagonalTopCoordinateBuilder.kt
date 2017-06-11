@@ -1,6 +1,6 @@
 package com.jameskbride.search.diagonal
 
-class DiagonalTopHalfCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
+class DiagonalTopCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
     fun buildCoordinates(matchingVectors: List<String>): List<String?> {
         val coordinates: List<String?> = matchingVectors.map{ vector ->
             val startingColumn = vector.indexOf(word)
