@@ -1,4 +1,4 @@
-package com.jameskbride
+package com.jameskbride.search.cardinal
 
 class HorizontalSearch(word: String, puzzle: Array<Array<String>>) : CardinalSearch(word, puzzle){
 

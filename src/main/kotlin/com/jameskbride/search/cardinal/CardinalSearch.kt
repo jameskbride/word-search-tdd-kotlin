@@ -1,6 +1,6 @@
-package com.jameskbride
+package com.jameskbride.search.cardinal
 
-open abstract class CardinalSearch(val word: String, val puzzle: Array<Array<String>>) {
+abstract class CardinalSearch(val word: String, val puzzle: Array<Array<String>>) {
 
     protected fun searchCardinally(index: Int, word: String, collatedWord: String, reversed: Boolean = false): String? {
         val directedWord = when {

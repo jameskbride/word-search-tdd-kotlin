@@ -1,4 +1,4 @@
-package com.jameskbride
+package com.jameskbride.search.diagonal
 
 class DiagonalTopHalfCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
     fun buildTopHalfDiagonalVectors(): List<String> {

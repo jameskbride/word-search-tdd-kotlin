@@ -1,4 +1,4 @@
-package com.jameskbride
+package com.jameskbride.search.diagonal
 
 class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>>) {
 
