@@ -4,20 +4,26 @@ class DiagonalBottomCoordinateBuilder(val word: String, val puzzle: Array<Array<
     fun buildCoordinates(vectors: List<String>): List<String> {
         val coordinates: List<String> = vectors.mapIndexed{ startingRowIndex, vector ->
             val startingColumn = vector.indexOf(word)
-            if (startingColumn > -1) {
-                val wordIndices: List<Pair<Int,Int>> = getWordIndices(word, startingColumn, startingRowIndex)
-                wordIndices.map { (x, y) -> "($x,$y)"}.joinToString(",")
-            } else {
-                null
-            }
+            mapWordIndices(startingColumn, startingRowIndex)
         }.filterNotNull()
 
         return coordinates
     }
 
-    private fun getWordIndices(word: String, startingColumn: Int, startingRowIndex: Int): List<Pair<Int,Int>> {
+    private fun mapWordIndices(startingColumn: Int, startingRowIndex: Int): String? {
+        return if (startingColumn > -1) {
+            val rowRange: IntRange = getRowRange(startingRowIndex, word)
+            val wordIndices: List<Pair<Int, Int>> = getWordIndices(startingColumn, rowRange)
+            wordIndices.map { (x, y) -> "($x,$y)" }.joinToString(",")
+        } else {
+            null
+        }
+    }
+
+    private fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
+
+    private fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn
-        val rowRange: IntRange = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
         return rowRange.map { rowIndex ->
             Pair(currentColumnIndex++, rowIndex + startingColumn)
         }
