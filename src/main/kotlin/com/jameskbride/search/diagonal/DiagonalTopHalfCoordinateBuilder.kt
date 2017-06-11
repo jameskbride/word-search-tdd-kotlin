@@ -1,32 +1,7 @@
 package com.jameskbride.search.diagonal
 
 class DiagonalTopHalfCoordinateBuilder(val word: String, val puzzle: Array<Array<String>>) {
-    fun buildTopHalfDiagonalVectors(): List<String> {
-        var collatedVectors: MutableList<String> = mutableListOf()
-        val columnRange: IntRange = IntRange(0, puzzle[0].indices.last)
-        collatedVectors.addAll(columnRange.map { columnIndex ->
-            mapDiagonalVectorsByColumn(columnIndex)
-        })
-
-        return collatedVectors
-    }
-
-    fun mapDiagonalVectorsByColumn(columnIndex: Int): String {
-        var currentColumnIndex = columnIndex
-        var currentRowIndex = puzzle.indices.first
-        var vector: String = ""
-        var maxRowIndex = puzzle.indices.last
-        while (maxRowIndex > -1 && currentColumnIndex in puzzle[0].indices) {
-            vector += puzzle[currentRowIndex][currentColumnIndex]
-            currentRowIndex++
-            currentColumnIndex++
-            maxRowIndex--
-        }
-
-        return vector
-    }
-
-    fun buildTopHalfCoordinates(matchingVectors: List<String>): List<String?> {
+    fun buildCoordinates(matchingVectors: List<String>): List<String?> {
         val coordinates: List<String?> = matchingVectors.map{ vector ->
             val startingColumn = vector.indexOf(word)
             if (startingColumn > -1) {
@@ -42,5 +17,30 @@ class DiagonalTopHalfCoordinateBuilder(val word: String, val puzzle: Array<Array
         }
 
         return coordinates
+    }
+
+    fun buildVectors(): List<String> {
+        var collatedVectors: MutableList<String> = mutableListOf()
+        val columnRange: IntRange = IntRange(0, puzzle[0].indices.last)
+        collatedVectors.addAll(columnRange.map { columnIndex ->
+            mapVectors(columnIndex)
+        })
+
+        return collatedVectors
+    }
+
+    fun mapVectors(columnIndex: Int): String {
+        var currentColumnIndex = columnIndex
+        var currentRowIndex = puzzle.indices.first
+        var vector: String = ""
+        var maxRowIndex = puzzle.indices.last
+        while (maxRowIndex > -1 && currentColumnIndex in puzzle[0].indices) {
+            vector += puzzle[currentRowIndex][currentColumnIndex]
+            currentRowIndex++
+            currentColumnIndex++
+            maxRowIndex--
+        }
+
+        return vector
     }
 }
