@@ -125,31 +125,55 @@ object WordSearchSpec: Spek({
     }
 
     describe("searching diagonally descending") {
-        val puzzle: Array<Array<String>> =
-                arrayOf(
-                        arrayOf("O","T", "X"),
-                        arrayOf("I","N", "Y"),
-                        arrayOf("A","B", "C")
-                )
 
-        it("can find one word by searching forward") {
-            val wordSearch: WordSearch = WordSearch(listOf("ON"), puzzle)
 
-            val results: List<String> = wordSearch.search()
+        describe("searching forward") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","T", "X"),
+                            arrayOf("I","N", "Y"),
+                            arrayOf("A","B", "C")
+                    )
 
-            assertEquals(1, results.size)
-            assertEquals("ON: (0,0),(1,1)", results[0])
+            it("can find one word by searching forward") {
+                val wordSearch: WordSearch = WordSearch(listOf("ON"), puzzle)
+
+                val results: List<String> = wordSearch.search()
+
+                assertEquals(1, results.size)
+                assertEquals("ON: (0,0),(1,1)", results[0])
+            }
+
+            it("can find multiple words by searching forward") {
+                val wordSearch: WordSearch = WordSearch(listOf("ON", "IB", "TY"), puzzle)
+
+                val results: List<String> = wordSearch.search()
+
+                assertEquals(3, results.size)
+                assertEquals("ON: (0,0),(1,1)", results[0])
+                assertEquals("IB: (0,1),(1,2)", results[1])
+                assertEquals("TY: (1,0),(2,1)", results[2])
+            }
         }
 
-        it("can find multiple words by searching forward") {
-            val wordSearch: WordSearch = WordSearch(listOf("ON", "IB", "TY"), puzzle)
+        describe("searching backwards") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("N","Y", "X"),
+                            arrayOf("B","O", "T"),
+                            arrayOf("A","I", "C")
+                    )
 
-            val results: List<String> = wordSearch.search()
+            it("can find words by searching backwards") {
+                val wordSearch: WordSearch = WordSearch(listOf("ON", "IB", "TY"), puzzle)
 
-            assertEquals(3, results.size)
-            assertEquals("ON: (0,0),(1,1)", results[0])
-            assertEquals("IB: (0,1),(1,2)", results[1])
-            assertEquals("TY: (1,0),(2,1)", results[2])
+                val results: List<String> = wordSearch.search()
+
+                assertEquals(3, results.size)
+                assertEquals("ON: (1,1),(0,0)", results[0])
+                assertEquals("IB: (1,2),(0,1)", results[1])
+                assertEquals("TY: (2,1),(1,0)", results[2])
+            }
         }
     }
 })

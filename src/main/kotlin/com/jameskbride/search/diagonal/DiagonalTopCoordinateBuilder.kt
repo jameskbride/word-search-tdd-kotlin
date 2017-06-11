@@ -1,6 +1,6 @@
 package com.jameskbride.search.diagonal
 
-class DiagonalTopCoordinateBuilder(word: String, puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(word, puzzle) {
+class DiagonalTopCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(puzzle) {
 
     override fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn
