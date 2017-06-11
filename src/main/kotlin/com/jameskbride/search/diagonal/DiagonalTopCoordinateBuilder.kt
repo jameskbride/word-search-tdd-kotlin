@@ -2,22 +2,13 @@ package com.jameskbride.search.diagonal
 
 class DiagonalTopCoordinateBuilder(word: String, puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(word, puzzle) {
 
-    fun buildVectors(): List<String> {
-        var collatedVectors: MutableList<String> = mutableListOf()
-        collatedVectors.addAll(IntRange(0, puzzle[0].indices.last).map { index ->
-            mapVectors(index)
-        })
-
-        return collatedVectors
-    }
-
     override fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn
         return rowRange.map { rowIndex ->
             Pair(++currentColumnIndex, rowIndex + startingColumn )
         }
     }
-    
+
     override fun mapVectors(columnIndex: Int): String {
         var currentColumnIndex = columnIndex
         var currentRowIndex = puzzle.indices.first

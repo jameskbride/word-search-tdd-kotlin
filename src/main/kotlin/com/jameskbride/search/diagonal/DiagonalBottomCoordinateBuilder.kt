@@ -2,15 +2,6 @@ package com.jameskbride.search.diagonal
 
 class DiagonalBottomCoordinateBuilder(word: String, puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(word, puzzle) {
 
-    fun buildVectors(): MutableList<String> {
-        var collatedVectors: MutableList<String> = mutableListOf()
-        collatedVectors.addAll(IntRange(0, puzzle.indices.last).map { index ->
-            mapVectors(index)
-        })
-
-        return collatedVectors
-    }
-
     override fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn
         return rowRange.map { rowIndex ->

@@ -24,4 +24,13 @@ abstract class DiagonalCoordinateBuilder(val word: String, val puzzle: Array<Arr
             null
         }
     }
+
+    fun buildVectors(): MutableList<String> {
+        var collatedVectors: MutableList<String> = mutableListOf()
+        collatedVectors.addAll(IntRange(0, puzzle.indices.last).map { index ->
+            mapVectors(index)
+        })
+
+        return collatedVectors
+    }
 }
