@@ -126,7 +126,6 @@ object WordSearchSpec: Spek({
 
     describe("searching diagonally descending") {
 
-
         describe("searching forward") {
             val puzzle: Array<Array<String>> =
                     arrayOf(
@@ -173,6 +172,26 @@ object WordSearchSpec: Spek({
                 assertEquals("ON: (1,1),(0,0)", results[0])
                 assertEquals("IB: (1,2),(0,1)", results[1])
                 assertEquals("TY: (2,1),(1,0)", results[2])
+            }
+        }
+    }
+
+    describe("Searching diagonally ascending") {
+        describe("searching forward") {
+            val puzzle: Array<Array<String>> =
+                    arrayOf(
+                            arrayOf("O","T", "X"),
+                            arrayOf("I","N", "Y"),
+                            arrayOf("A","B", "C")
+                    )
+
+            it("can find one word by searching forward") {
+                val wordSearch: WordSearch = WordSearch(listOf("AN"), puzzle)
+
+                val results: List<String> = wordSearch.search()
+
+                assertEquals(1, results.size)
+                assertEquals("AN: (0,2),(1,1)", results[0])
             }
         }
     }
