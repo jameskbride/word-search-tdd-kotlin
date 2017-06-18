@@ -39,5 +39,12 @@ object DiagonalAscendingBottomCoordinateBuilderSpec: Spek({
             assertEquals("C", result)
         }
     }
+
+    describe("getting word indices") {
+        it("increases the column and decreases the row") {
+            val result = builder.getWordIndices(0, 0..1)
+            assertEquals(listOf(Pair(0,2), Pair(1,1)), result)
+        }
+    }
 })
 

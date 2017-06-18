@@ -1,8 +1,11 @@
 package com.jameskbride.search.diagonal 
 
 class DiagonalAscendingBottomCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(puzzle) {
-    override fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int, Int>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getWordIndices(startingColumn: Int, rowRange: IntProgression): List<Pair<Int, Int>> {
+        var currentColumnIndex = startingColumn
+        return rowRange.reversed().map { rowIndex ->
+            Pair(currentColumnIndex++, rowIndex + 1 )
+        }
     }
 
     override fun mapVector(columnIndex: Int): String {

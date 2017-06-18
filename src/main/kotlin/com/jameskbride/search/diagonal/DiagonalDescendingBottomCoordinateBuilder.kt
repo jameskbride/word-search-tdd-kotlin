@@ -2,7 +2,7 @@ package com.jameskbride.search.diagonal
 
 class DiagonalBottomCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(puzzle) {
 
-    override fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>> {
+    override fun getWordIndices(startingColumn: Int, rowRange: IntProgression): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn
         return rowRange.map { rowIndex ->
             Pair(currentColumnIndex++, rowIndex + startingColumn)

@@ -53,7 +53,7 @@ abstract class DiagonalCoordinateBuilder(val puzzle: Array<Array<String>>) {
 
     private fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
 
-    abstract fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>>
+    abstract fun getWordIndices(startingColumn: Int, rowRange: IntProgression): List<Pair<Int,Int>>
 
     abstract fun mapVector(rowIndex: Int): String
 }
