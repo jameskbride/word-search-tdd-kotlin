@@ -5,7 +5,17 @@ class DiagonalAscendingBottomCoordinateBuilder(puzzle: Array<Array<String>>) : D
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun mapVector(rowIndex: Int): String {
-        return "ANX"
+    override fun mapVector(columnIndex: Int): String {
+        var currentColumnIndex = columnIndex
+        var currentRowIndex = puzzle.indices.last
+        var vector: String = ""
+        var maxRowIndex = puzzle.indices.last
+        while (maxRowIndex > -1 && currentColumnIndex in puzzle[0].indices) {
+            vector += puzzle[currentRowIndex][currentColumnIndex]
+            currentRowIndex--
+            currentColumnIndex++
+        }
+
+        return vector
     }
 }

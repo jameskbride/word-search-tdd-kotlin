@@ -17,14 +17,23 @@ object DiagonalAscendingBottomCoordinateBuilderSpec: Spek({
                     arrayOf("A","B", "C")
             )
 
-    describe("given the last row") {
-        it("map a vector") {
+    describe("mapping columns") {
+        it("maps a vector on the center line") {
             val builder: DiagonalAscendingBottomCoordinateBuilder =
                     DiagonalAscendingBottomCoordinateBuilder(puzzle)
 
-            val result = builder.mapVector(2)
+            val result = builder.mapVector(0)
 
             assertEquals(result, "ANX")
+        }
+
+        it("maps a vector off of the center line") {
+            val builder: DiagonalAscendingBottomCoordinateBuilder =
+                    DiagonalAscendingBottomCoordinateBuilder(puzzle)
+
+            val result = builder.mapVector(1)
+
+            assertEquals("BY", result)
         }
     }
 })
