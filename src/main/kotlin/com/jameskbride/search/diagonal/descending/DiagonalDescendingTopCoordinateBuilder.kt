@@ -25,4 +25,7 @@ class DiagonalDescendingTopCoordinateBuilder(puzzle: Array<Array<String>>) : Dia
 
         return vector
     }
+
+    override fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
+
 }

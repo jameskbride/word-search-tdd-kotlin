@@ -47,11 +47,11 @@ abstract class DiagonalCoordinateBuilder(val puzzle: Array<Array<String>>) {
     private fun foundWord(startingColumn: Int) = startingColumn > -1
 
     private fun mapWordIndices(startingColumn: Int, startingRowIndex: Int, word: String): List<Pair<Int,Int>> {
-        val rowRange: IntRange = getRowRange(startingRowIndex, word)
+        val rowRange: IntProgression = getRowRange(startingRowIndex, word)
         return getWordIndices(startingColumn, rowRange)
     }
 
-    private fun getRowRange(startingRowIndex: Int, word: String) = IntRange(startingRowIndex, startingRowIndex + word.indices.last)
+    abstract fun getRowRange(startingRowIndex: Int, word: String) : IntProgression
 
     abstract fun getWordIndices(startingColumn: Int, rowRange: IntProgression): List<Pair<Int,Int>>
 
