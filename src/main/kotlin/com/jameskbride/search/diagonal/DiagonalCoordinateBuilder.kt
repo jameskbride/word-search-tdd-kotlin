@@ -5,7 +5,7 @@ abstract class DiagonalCoordinateBuilder(val puzzle: Array<Array<String>>) {
     fun buildLetterVectors(): MutableList<String> {
         var collatedVectors: MutableList<String> = mutableListOf()
         collatedVectors.addAll(IntRange(0, puzzle.indices.last).map { index ->
-            mapVectors(index)
+            mapVector(index)
         })
 
         return collatedVectors
@@ -55,5 +55,5 @@ abstract class DiagonalCoordinateBuilder(val puzzle: Array<Array<String>>) {
 
     abstract fun getWordIndices(startingColumn: Int, rowRange: IntRange): List<Pair<Int,Int>>
 
-    abstract fun mapVectors(rowIndex: Int): String
+    abstract fun mapVector(rowIndex: Int): String
 }

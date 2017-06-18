@@ -9,7 +9,7 @@ class DiagonalTopCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoord
         }
     }
 
-    override fun mapVectors(columnIndex: Int): String {
+    override fun mapVector(columnIndex: Int): String {
         var currentColumnIndex = columnIndex
         var currentRowIndex = puzzle.indices.first
         var vector: String = ""

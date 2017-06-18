@@ -1,6 +1,6 @@
 package com.jameskbride.search.diagonal
 
-class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>>) {
+class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>>) : DiagonalSearch() {
 
     fun execute(): List<String?> {
         val bottomCoordinateBuilder: DiagonalBottomCoordinateBuilder = DiagonalBottomCoordinateBuilder(puzzle)
@@ -16,9 +16,8 @@ class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>
                     topCoordinateBuilder.findWord(topHalfDiagonalVectors.minus(bottomHalfDiagonalVectors), word, reversed = true)
                 ).filterNotNull().distinct()
 
-            return buildCoordinateString(coordinates)
+            return buildCoordinateString(word, coordinates)
     }
 
-    private fun buildCoordinateString(coordinates: List<String?>) = coordinates.map { coords -> "$word: $coords" }
 
 }
