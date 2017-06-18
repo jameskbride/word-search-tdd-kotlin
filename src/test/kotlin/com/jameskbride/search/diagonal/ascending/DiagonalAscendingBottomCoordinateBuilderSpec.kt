@@ -1,13 +1,11 @@
-package com.jameskbride.search.diagonal
+package com.jameskbride.search.diagonal.ascending
 
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import org.junit.Assert.assertEquals
-import org.junit.platform.runner.JUnitPlatform
-import org.junit.runner.RunWith
 
-@RunWith(JUnitPlatform::class)
+@org.junit.runner.RunWith(org.junit.platform.runner.JUnitPlatform::class)
 object DiagonalAscendingBottomCoordinateBuilderSpec: Spek({
 
     val puzzle: Array<Array<String>> =

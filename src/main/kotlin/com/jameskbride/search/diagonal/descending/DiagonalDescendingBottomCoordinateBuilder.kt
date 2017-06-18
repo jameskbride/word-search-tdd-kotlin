@@ -1,4 +1,6 @@
-package com.jameskbride.search.diagonal
+package com.jameskbride.search.diagonal.descending
+
+import com.jameskbride.search.diagonal.DiagonalCoordinateBuilder
 
 class DiagonalBottomCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(puzzle) {
 

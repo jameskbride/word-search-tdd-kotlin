@@ -2,8 +2,8 @@ package com.jameskbride
 
 import com.jameskbride.search.cardinal.HorizontalSearch
 import com.jameskbride.search.cardinal.VerticalSearch
-import com.jameskbride.search.diagonal.DiagonalAscendingSearch
-import com.jameskbride.search.diagonal.DiagonalDescendingSearch
+import com.jameskbride.search.diagonal.ascending.DiagonalAscendingSearch
+import com.jameskbride.search.diagonal.descending.DiagonalDescendingSearch
 
 class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
     fun search(): List<String> {

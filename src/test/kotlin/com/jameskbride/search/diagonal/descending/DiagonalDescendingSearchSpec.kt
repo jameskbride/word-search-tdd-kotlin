@@ -1,4 +1,4 @@
-package com.jameskbride.search.diagonal
+package com.jameskbride.search.diagonal.descending
 
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
