@@ -240,6 +240,17 @@ object WordSearchSpec: Spek({
                     assertEquals("IT: (0,1),(1,0)", results[1])
                 }
             }
+
+            describe("searching backwards") {
+                it("can find one word") {
+                    val wordSearch: WordSearch = WordSearch(listOf("TI"), puzzle)
+
+                    val results: List<String> = wordSearch.search()
+
+                    assertEquals(1, results.size)
+                    assertEquals("TI: (1,0),(0,1)", results[0])
+                }
+            }
         }
     }
 })

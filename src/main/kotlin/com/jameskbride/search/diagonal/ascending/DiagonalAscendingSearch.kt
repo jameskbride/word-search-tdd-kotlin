@@ -13,7 +13,8 @@ class DiagonalAscendingSearch(val word: String, val puzzle: Array<Array<String>>
         val wordCoordinates: List<WordCoordinates> = (
                 findWord(bottomVectors, word) +
                 findWord(bottomVectors, word, reversed = true) +
-                findWord(topVectors.minus(bottomVectors), word)
+                findWord(topVectors.minus(bottomVectors), word) +
+                findWord(topVectors.minus(bottomVectors), word, reversed = true)
             )
 
 
