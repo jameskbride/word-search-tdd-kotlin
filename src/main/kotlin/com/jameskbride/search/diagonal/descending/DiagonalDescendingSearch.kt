@@ -5,7 +5,7 @@ import com.jameskbride.search.diagonal.DiagonalSearch
 class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>>) : DiagonalSearch() {
 
     fun execute(): List<String?> {
-        val bottomCoordinateBuilder: DiagonalBottomCoordinateBuilder = DiagonalBottomCoordinateBuilder(puzzle)
+        val bottomCoordinateBuilder: DiagonalDescendingBottomCoordinateBuilder = DiagonalDescendingBottomCoordinateBuilder(puzzle)
         val bottomHalfDiagonalVectors: List<String> = bottomCoordinateBuilder.buildLetterVectors()
 
         val descendingTopCoordinateBuilder: DiagonalDescendingTopCoordinateBuilder = DiagonalDescendingTopCoordinateBuilder(puzzle)

@@ -1,8 +1,6 @@
 package com.jameskbride.search.diagonal.descending
 
-import com.jameskbride.search.diagonal.DiagonalCoordinateBuilder
-
-class DiagonalDescendingTopCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalCoordinateBuilder(puzzle) {
+class DiagonalDescendingTopCoordinateBuilder(puzzle: Array<Array<String>>) : DiagonalDescendingCoordinateBuilder(puzzle) {
 
     override fun getWordIndices(startingColumn: Int, rowRange: IntProgression): List<Pair<Int,Int>> {
         var currentColumnIndex = startingColumn

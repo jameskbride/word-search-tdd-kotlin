@@ -1,6 +1,6 @@
-package com.jameskbride.search.diagonal
+package com.jameskbride.search.diagonal.descending
 
-abstract class DiagonalCoordinateBuilder(val puzzle: Array<Array<String>>) {
+abstract class DiagonalDescendingCoordinateBuilder(val puzzle: Array<Array<String>>) {
 
     fun buildLetterVectors(): MutableList<String> {
         var collatedVectors: MutableList<String> = mutableListOf()
