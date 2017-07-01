@@ -20,6 +20,4 @@ class DiagonalDescendingSearch(val word: String, val puzzle: Array<Array<String>
 
             return buildCoordinateString(word, coordinates)
     }
-
-
 }
