@@ -219,5 +219,27 @@ object WordSearchSpec: Spek({
             }
         }
 
+        describe("Searching the top half") {
+            describe("searching forward") {
+                it("can find one word") {
+                    val wordSearch: WordSearch = WordSearch(listOf("IT"), puzzle)
+
+                    val results: List<String> = wordSearch.search()
+
+                    assertEquals(1, results.size)
+                    assertEquals("IT: (0,1),(1,0)", results[0])
+                }
+
+                it("can find multiple words") {
+                    val wordSearch: WordSearch = WordSearch(listOf("AN", "IT"), puzzle)
+
+                    val results: List<String> = wordSearch.search()
+
+                    assertEquals(2, results.size)
+                    assertEquals("AN: (0,2),(1,1)", results[0])
+                    assertEquals("IT: (0,1),(1,0)", results[1])
+                }
+            }
+        }
     }
 })
