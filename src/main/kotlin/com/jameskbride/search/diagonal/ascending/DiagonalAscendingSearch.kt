@@ -10,25 +10,47 @@ class DiagonalAscendingSearch(val word: String, val puzzle: Array<Array<String>>
     fun execute(): List<String?> {
         val vectors: List<Vector> = buildVectors()
         val wordCoordinates: List<WordCoordinates> = findWord(vectors, word)
+        val reversedWordCoordinates: List<WordCoordinates> = findWord(vectors, word, reversed = true)
 
-        return wordCoordinates.map { (coords) ->
+        val coordinates: List<WordCoordinates> = (
+                wordCoordinates +
+                reversedWordCoordinates
+                )
+        val bottomCoordinates: List<String?> = coordinates.map { (coords) ->
             val coordStrings = buildCoordinatesString(coords)
             "$word: $coordStrings"
         }
+
+        return bottomCoordinates
     }
 
-    private fun findWord(vectors: List<Vector>, word: String): List<WordCoordinates> {
+    private fun findWord(vectors: List<Vector>, word: String, reversed: Boolean = false): List<WordCoordinates> {
         val foundWordCoords: List<WordCoordinates> = vectors
-                .filter { vector -> vector.letters.indexOf(word) > -1 }
-                .map { vector -> buildWordCoordinates(vector, word) }
+                .filter { vector ->
+                    when {
+                        reversed -> vector.letters.reversed().indexOf(word) > -1
+                        else -> vector.letters.indexOf(word) > -1
+                    }
+                }
+                .map { vector -> buildWordCoordinates(vector, word, reversed) }
         return foundWordCoords
     }
 
-    private fun buildWordCoordinates(vector: Vector, word: String): WordCoordinates {
-        val fromIndex: Int = vector.letters.indexOf(word)
-        val toIndex = fromIndex + word.length
+    private fun buildWordCoordinates(vector: Vector, word: String, reversed: Boolean = false): WordCoordinates {
 
-        return WordCoordinates(vector.coords.subList(fromIndex, toIndex))
+        val coords = when {
+            reversed -> {
+                val fromIndex: Int = vector.letters.reversed().indexOf(word)
+                val toIndex = fromIndex + word.length
+                vector.coords.reversed().subList(fromIndex, toIndex)
+            }
+            else -> {
+                val fromIndex: Int = vector.letters.indexOf(word)
+                val toIndex = fromIndex + word.length
+                vector.coords.subList(fromIndex, toIndex)
+            }
+        }
+        return WordCoordinates(coords)
     }
 
     private fun buildCoordinatesString(coords: List<Pair<Int, Int>>) = coords.map { "(${it.first},${it.second})" }.joinToString(",")
