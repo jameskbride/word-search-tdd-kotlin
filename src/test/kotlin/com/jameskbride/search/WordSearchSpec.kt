@@ -4,7 +4,6 @@ import com.jameskbride.WordSearch
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.xdescribe
 import org.junit.Assert.*
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
@@ -177,7 +176,7 @@ object WordSearchSpec: Spek({
         }
     }
 
-    xdescribe("Searching diagonally ascending") {
+    describe("Searching diagonally ascending") {
         describe("searching forward") {
             val puzzle: Array<Array<String>> =
                     arrayOf(
