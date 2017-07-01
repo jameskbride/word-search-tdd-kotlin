@@ -12,7 +12,6 @@ class WordSearch(val words: List<String>, val puzzle: Array<Array<String>>) {
         output.addAll(words.flatMap { word -> HorizontalSearch(word, puzzle).execute() })
         output.addAll(words.flatMap { word -> VerticalSearch(word, puzzle).execute() })
         output.addAll(words.flatMap { word -> DiagonalDescendingSearch(word, puzzle).execute() })
-        output.addAll(words.flatMap { word -> DiagonalAscendingSearch(word, puzzle).execute() })
 
         return output.filterNotNull()
     }
