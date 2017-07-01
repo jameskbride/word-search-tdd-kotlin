@@ -1,6 +1,5 @@
 package com.jameskbride.search.diagonal.ascending
 
-import com.jameskbride.WordSearch
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
@@ -27,6 +26,16 @@ object DiagonalAscendingSearchSpec: Spek({
 
                 Assert.assertEquals(1, results.size)
                 Assert.assertEquals("AN: (0,2),(1,1)", results[0])
+            }
+
+            it("can find a word by searching off the center line") {
+                val wordSearch: DiagonalAscendingSearch = DiagonalAscendingSearch("BY", puzzle)
+
+                val results: List<String?> = wordSearch.execute()
+                println(results)
+
+                Assert.assertEquals(1, results.size)
+                Assert.assertEquals("BY: (1,2),(2,1)", results[0])
             }
         }
     }
