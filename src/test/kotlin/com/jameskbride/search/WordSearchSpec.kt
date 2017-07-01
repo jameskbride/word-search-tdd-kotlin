@@ -184,37 +184,40 @@ object WordSearchSpec: Spek({
                         arrayOf("A","B", "C")
                 )
 
-        describe("searching forward") {
-            it("can find one word") {
-                val wordSearch: WordSearch = WordSearch(listOf("AN"), puzzle)
+        describe("searching the bottom half") {
+            describe("searching forward") {
+                it("can find one word") {
+                    val wordSearch: WordSearch = WordSearch(listOf("AN"), puzzle)
 
-                val results: List<String> = wordSearch.search()
+                    val results: List<String> = wordSearch.search()
 
-                assertEquals(1, results.size)
-                assertEquals("AN: (0,2),(1,1)", results[0])
+                    assertEquals(1, results.size)
+                    assertEquals("AN: (0,2),(1,1)", results[0])
+                }
+
+                it("can find multiple words") {
+                    val wordSearch: WordSearch = WordSearch(listOf("AN", "NX", "BY"), puzzle)
+
+                    val results: List<String> = wordSearch.search()
+
+                    assertEquals(3, results.size)
+                    assertEquals("AN: (0,2),(1,1)", results[0])
+                    assertEquals("NX: (1,1),(2,0)", results[1])
+                    assertEquals("BY: (1,2),(2,1)", results[2])
+                }
             }
 
-            it("can find multiple words") {
-                val wordSearch: WordSearch = WordSearch(listOf("AN", "NX", "BY"), puzzle)
+            describe("searching backwards") {
+                it("can find one word") {
+                    val wordSearch: WordSearch = WordSearch(listOf("NA"), puzzle)
 
-                val results: List<String> = wordSearch.search()
+                    val results: List<String> = wordSearch.search()
 
-                assertEquals(3, results.size)
-                assertEquals("AN: (0,2),(1,1)", results[0])
-                assertEquals("NX: (1,1),(2,0)", results[1])
-                assertEquals("BY: (1,2),(2,1)", results[2])
+                    assertEquals(1, results.size)
+                    assertEquals("NA: (1,1),(0,2)", results[0])
+                }
             }
         }
 
-        describe("searching backwards") {
-            it("can find one word") {
-                val wordSearch: WordSearch = WordSearch(listOf("NA"), puzzle)
-
-                val results: List<String> = wordSearch.search()
-
-                assertEquals(1, results.size)
-                assertEquals("NA: (1,1),(0,2)", results[0])
-            }
-        }
     }
 })
